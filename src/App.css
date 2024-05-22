@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 22px;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+
+.App {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 99vh; 
+  width: 99%; 
+  max-width: 500px;
+  border: 1px solid black;
+  margin: auto;
+}
+
+header {
+  width: 99%;
+  padding: 0 0.25em;
+  background-color: rgb(2, 15, 25);
+  color: rgb(226, 236, 245);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 12%;
+}
+
+main {
+  width: 99%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+footer {
+  width: 100%;
+  padding: 0.25em;
+  background-color: black;
+  color: rgb(227, 233, 239);
+  display: grid;
+  place-content: center;
+}
+
+ul {
+  width: 99%;
+  list-style: none;
+  padding: 0 0.25rem 0.25rem;
+}
+
+ul li::before {
+  content: "\200B";
+}
+
+.item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.4rem 0 0.4rem 0.4rem;
+  margin: 0.24rem 0;
+  background-color: #eee;
+}
+
+.item:first-child {
+  margin: 0;
+}
+
+.item input[type="checkbox"] {
+  text-align: center;
+  width: 2.4rem;
+  width: 47px;
+  min-width: 47px;
+  height: 2.4rem;
+  height: 47px;
+  min-height: 47px;
+  cursor: pointer;
+  margin-right: 0.4rem;
+}
+
+.item input[type="checkbox"]:focus + label {
+  text-decoration: underline;
+}
+
+.item > label {
+  font-size: 0.76rem;
+  flex-grow: 1;
+}
+
+.item svg {
+  width: 47px;
+  min-width: 47px;
+  height: 35px;
+  font-size: 1rem;
+  color:black;
+  cursor: pointer;
+}
+
+.item svg:focus, 
+.item svg:hover {
+  color: red;
+  outline: none;
+}
+.inputAdd{
+  width: 300px;
+ height: 50px;
+
+  margin: 5px;
+  padding: 5px;
+}
+.add{
+  text-align: center;
+  width: 2.4rem;
+  width: 47px;
+  min-width: 47px;
+  height: 2.4rem;
+  height: 47px;
+  min-height: 47px;
+  cursor: pointer;
+  margin-right: 0.4rem;
+}
