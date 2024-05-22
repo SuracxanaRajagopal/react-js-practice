@@ -1,25 +1,37 @@
-import React from 'react'
+import React from 'react';
+import { FaTrashAlt } from "react-icons/fa";
 
-import MyList from './MyList'
+const Content = ({ items, handleCheck, handleDelete }) => {
+  return (
+    <main>
+      {items.length ? (
+        <ul>
+          {items.map((item) => (
+            <li key={item.id} className="item">
+              <input 
+                type="checkbox"
+                checked={item.checked}
+                onChange={() => handleCheck(item.id)}
+              />
+              <label
+                style={item.checked ? { textDecoration: "line-through" } : null}
+                onDoubleClick={() => handleCheck(item.id)}
+              >
+                {item.name}
+              </label>
+              <button onClick={() => handleDelete(item.id)}><FaTrashAlt/></button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Your list is empty.</p>
+      )}
+    </main>
+  );
+};
 
-const Content = ({items,Check,Delete}) => {
-return(
-  <main>
-  
-{(items.length)?(
-  <MyList
-  items={items}
-  Check={Check}
-  Delete={Delete}/>
-  
-    ):
-        (<p>your list is empty !!</p>)
-  }
-  </main>
-)
-}
+export default Content;
 
-export default Content
        /* function HandleNameChange()
             {
             const names=["Guys","friends","dears"];

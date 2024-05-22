@@ -1,104 +1,75 @@
-//import React, {Component} from 'react';
 import './App.css';
-import { useState } from 'react';
-//import  {Greet} from './components/greet'
-//import Class_component from './components/class_component';
+import { useState, useEffect } from 'react';
 import Hader from './components/Hader';
 import Content from './components/Content';
 import Footer from './components/Footer';
 import AddList from './components/AddList';
 
-function App ()
-{
-  const [items,setItems]=useState([
-    {
-      id:1,
-      name:"surax",
-      checked:true,
-      experiance:"yes"
-    },
-    {
-      id:2,
-      name:"malar",
-      checked:false,
-      experiance:"no"
-    },
-    {
-      id:3,
-      name:"rakul",
-      checked:true,
-      experiance:"yes"
-    },
-    {
-      id:4,
-      name:"thurka",
-      checked:false,
-      experiance:"yes"
-    },
-    {
-      id:5,
-      name:"shan",
-      checked:false,
-      experiance:"yes"
+function App() {
+  const [items, setItems] = useState([
+    { id: 1, name: "surax", checked: true, experience: "yes" },
+    { id: 2, name: "malar", checked: false, experience: "no" },
+    { id: 3, name: "rakul", checked: true, experience: "yes" },
+    { id: 4, name: "thurka", checked: false, experience: "yes" },
+    { id: 5, name: "shan", checked: false, experience: "yes" }
+  ]);
+
+  // State for new item input
+  const [getItem, setItem] = useState("");
+
+  // Retrieve items from localStorage on component mount
+  useEffect(() => {
+    const storedItems = JSON.parse(localStorage.getItem("mylist"));
+    if (storedItems) {
+      setItems(storedItems);
     }
-  
-  ])
-  //add new item -create new stste inputget(getItem) nextInput(setItem)
-  const [getItem,setItem]=useState("")
+  }, []);
 
+  const addItem = (item) => {
+    const id = items.length ? items[items.length - 1].id + 1 : 1;
+    const addNewItem = { id, name: item, checked: false }; // Correctly set the name property
+    const listItems = [...items, addNewItem];
+    setItems(listItems);
+    localStorage.setItem("mylist", JSON.stringify(listItems));
+  };
 
-  //function check
-  const Check=(id)=>{
-  const listitems=items.map((item)=>item.id===id?{...item,checked:!item.checked}:item)
-    setItems(listitems)
-    localStorage.setItem("mylist",JSON.stringify(listitems))
-  }
-  
-  //function delete
-  const Delete=(id)=>{
-    const listitems=items.filter((item)=>
-    item.id!==id) 
-    setItems(listitems)
-    localStorage.setItem("mylist",JSON.stringify(listitems))
-  }
-  
-  //add button function
-  const addSubmit=(e)=>{
-    e.preventDefault()
-    console.log("submitted")
-  }
-  
+  // Toggle checked status
+  const handleCheck = (id) => {
+    const listItems = items.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
+    );
+    setItems(listItems);
+    localStorage.setItem("mylist", JSON.stringify(listItems));
+  };
+
+  // Delete item
+  const handleDelete = (id) => {
+    const listItems = items.filter((item) => item.id !== id);
+    setItems(listItems);
+    localStorage.setItem("mylist", JSON.stringify(listItems));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!getItem.trim()) return;
+    addItem(getItem);
+    setItem("");
+  };
+
   return (
-    <div className='App' >
-      
-      <Hader title="surax"/>
+    <div className='App'>
+      <Hader title="surax" />
       <AddList
         getItem={getItem}
         setItem={setItem}
-        addSubmit={addSubmit}
-      
+        handleSubmit={handleSubmit}
       />
-
       <Content
-          items={items}
-          Check={Check}
-          Delete={Delete}/>
-
-
-  <Footer
-  legnthIs={items.length}/>
-
-
-     {/* <Class_component/>
-        <Greet >
-        <button>submit</button>
-        <p>morning guys</p>
-          </Greet>
-        <Greet name="surax" age="18"/>
-        <Greet name="isha" age="27"/>*/}
-      
-   
-       
+        items={items}
+        handleCheck={handleCheck}
+        handleDelete={handleDelete}
+      />
+      <Footer length={items.length} />
     </div>
   );
 }

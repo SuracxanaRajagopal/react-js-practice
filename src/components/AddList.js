@@ -1,35 +1,18 @@
-import React from 'react'
-import { FaPlus } from "react-icons/fa";
+import React from 'react';
 
 
-const AddList = ({getItem,setItem,addSubmit}) => {
+const AddList = ({ getItem, setItem, handleSubmit }) => {
   return (
-   <form className='addform'>
-    <label htmlFor='addItem'></label>
+    <form onSubmit={handleSubmit}>
+      <input className="inputAdd"
+        type="text"
+        placeholder="Add Item"
+        value={getItem}
+        onChange={(e) => setItem(e.target.value)}
+      />
+      <button type="submit" className="add">+</button>
+    </form>
+  );
+};
 
-    <input className="inputAdd"
-    onSubmit={addSubmit}
-    autoFocus
-    id='addItem'
-    type='text'
-    placeholder='add new items '
-    required
-    value={getItem}
-    onChange={(e)=>setItem(e.target.value)}
-    >
-    </input>
-
-<button
-className="add"
-type='submit'
->
-  <FaPlus/>  
-</button>
-
-   </form>
-   
-    
-  )
-}
-
-export default AddList
+export default AddList;
